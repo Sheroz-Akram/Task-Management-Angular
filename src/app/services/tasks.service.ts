@@ -1,35 +1,28 @@
 import { Injectable } from '@angular/core';
 import { Task } from '../types/task.interface';
+import { Observable, of } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TasksService {
+  baseURL: string = 'http://localhost:5000';
+  constructor(private http: HttpClient) {}
 
-  tasks: Task[] = [
-    {
-      "id": 1,
-      "text": "Doctors Appointment",
-      "day": "May 5th at 2:30pm",
-      "reminder": true
-    },
-    {
-      "id": 2,
-      "text": "Meeting at School",
-      "day": "May 6th at 1:30pm",
-      "reminder": true
-    },
-    {
-      "id": 3,
-      "text": "Food Shopping",
-      "day": "May 7th at 12:30pm",
-      "reminder": false
-    }
-  ];
-  
-  getTasks(): Task[]{
-    return this.tasks;
+  getTasks(): Observable<Task[]> {
+    return this.http.get<Task[]>(`${this.baseURL}/tasks`);
   }
-  
-  constructor() { }
+
+  deleteTask(taskID: number): Observable<Task> {
+    return this.http.delete<Task>(`${this.baseURL}/tasks/${taskID}`);
+  }
+
+  toggleTaskReminder(task: Task): Observable<Task> {
+    return this.http.put<Task>(`${this.baseURL}/tasks/${task.id}`, task, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+    });
+  }
 }

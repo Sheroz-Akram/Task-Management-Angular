@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Task } from '../../types/task.interface';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -14,5 +14,16 @@ import { CommonModule } from '@angular/common';
 })
 export class TaskComponent {
   @Input() task: Task | undefined;
+  @Output() deleteTask = new EventEmitter<number>();
+  @Output() onToggleTask = new EventEmitter<number>();
   faTimes = faTimes;
+
+  onDeleteTask(){
+    this.deleteTask.emit(this.task?.id);
+  }
+
+  onToggle(){
+    this.onToggleTask.emit(this.task?.id);
+  }
+  
 }
