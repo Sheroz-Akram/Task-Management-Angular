@@ -14,6 +14,14 @@ export class TasksService {
     return this.http.get<Task[]>(`${this.baseURL}/tasks`);
   }
 
+  createTask(task: Task): Observable<Task>{
+    return this.http.post<Task>(`${this.baseURL}/tasks/`, task, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+    });
+  }
+
   deleteTask(taskID: number): Observable<Task> {
     return this.http.delete<Task>(`${this.baseURL}/tasks/${taskID}`);
   }

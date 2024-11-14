@@ -1,3 +1,4 @@
+<add-task (newTask)="onTaskAdd($event)"/>
 @for (task of tasks; track task.id) {
     <task-item [task]="task" (deleteTask)="onDeleteTask($event)" (onToggleTask)="onToggleTask($event)" />
 }
