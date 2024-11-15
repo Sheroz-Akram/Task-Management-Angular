@@ -1,4 +1,8 @@
 <header>
-    <h1>{{ title }}</h1>
-    <simple-button color="red" text="Close" (btnClick)="toggleAddTask()" />
+  <h1>{{ title }}</h1>
+  <simple-button
+    color="{{ showAddTask ? 'red' : 'green' }}"
+    text="{{ showAddTask ? 'Close' : 'Add' }}"
+    (btnClick)="toggleAddTask()"
+  />
 </header>

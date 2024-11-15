@@ -4,7 +4,7 @@
       "id": "c7e9",
       "text": "Simple Task",
       "day": "Monday 12:00PM",
-      "reminder": false
+      "reminder": true
     },
     {
       "id": "d77d",
